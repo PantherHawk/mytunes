@@ -37,8 +37,8 @@ describe('LibraryView', function() {
 
     beforeEach(function() {
       requests = [];
-      xhr = sinon.useFakeXMLHttpRequest();
-      xhr.onCreate = function(request) {
+      hr = sinon.useFakeXMLHttpRequest();
+      hr.onCreate = function(request) {
         requests.push(request);
       };
 
@@ -46,10 +46,10 @@ describe('LibraryView', function() {
     });
 
     afterEach(function() {
-      xhr.restore();
+      hr.restore();
     });
 
-    xit('should re-render with fetched songs', function() {
+    it('should re-render with fetched songs', function() {
       var FakeLibraryView = LibraryView.extend({ render: sinon.spy() });
       view = new FakeLibraryView({ collection: new Songs() });
       expect(view.render).to.have.been.calledOnce;
