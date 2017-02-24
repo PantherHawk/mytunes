@@ -1,4 +1,4 @@
-// SongQueue.js - Defines a backbone model class for the song queue.
+  // SongQueue.js - Defines a backbone model class for the song queue.
 var SongQueue = Backbone.Collection.extend({
 
   model: SongModel,
@@ -20,14 +20,20 @@ var SongQueue = Backbone.Collection.extend({
   },
 
   dequeue: function(song) {
-    this.remove();
+    if (this.at(0) === song) {
+      this.playNext();
+    } else {
+      this.remove(song);
+    }
   },
 
   playNext: function() {
     this.shift();
     if (this.length) {
       this.playFirst();
+    } else {
+      this.trigger('stop');
     }
-  }
+  },
 
 });
